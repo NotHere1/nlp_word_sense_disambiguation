@@ -1,34 +1,50 @@
 #
-# svm
+# svm ~ English
 #
-
-jn2427@beijing:~/hidden/2688365476/Homework3$ ./scorer2 English.baseline data/English-dev.key data/English.sensemap 
-
 Fine-grained score for "English.baseline" using key "data/English-dev.key":
- precision: 0.547 (1085.00 correct of 1985.00 attempted)
- recall: 0.547 (1085.00 correct of 1985.00 in total)
- attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
-
-
-#
-# baseline
-#
-
-jn2427@beijing:~/hidden/2688365476/Homework3$ python baseline.py English
-jn2427@beijing:~/hidden/2688365476/Homework3$ ./scorer2 English.baseline data/English-dev.key data/English.sensemap 
-
-Fine-grained score for "English.baseline" using key "data/English-dev.key":
- precision: 0.535 (1061.00 correct of 1985.00 attempted)
- recall: 0.535 (1061.00 correct of 1985.00 in total)
- attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
-
+ precision: 0.627 (1242.00 correct of 1985.00 attempted)
+ recall: 0.627 (1242.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)a
 
 #
-# kneighbors
+# svm ~ Spanish
 #
-jn2427@beijing:~/hidden/2688365476/Homework3$ ./scorer2 English.baseline data/English-dev.key data/English.sensemap 
+Fine-grained score for "Spanish.baseline" using key "data/Spanish-dev.key":
+ precision: 0.811 (1709.00 correct of 2107.00 attempted)
+ recall: 0.811 (1709.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
 
-Fine-grained score for "English.baseline" using key "data/English-dev.key":
- precision: 0.560 (1111.00 correct of 1985.00 attempted)
- recall: 0.560 (1111.00 correct of 1985.00 in total)
- attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+#
+# svm ~ Catalan
+#
+Fine-grained score for "Catalan.baseline" using key "data/Catalan-dev.key":
+ precision: 0.819 (928.00 correct of 1133.00 attempted)
+ recall: 0.819 (928.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+
+features ~
+
+case_sensetive for all language, remove punctuation for all language, remove stop words for all except Catalan, stemming for English & Spanish. Window size 13.
+
+Hypernyms & hyponyms for English. 
+
+Added 2 hyper & hypornyms for each sense available for the targeted lexelt
+
+features 4.c
+
+runtime ~
+
+English has by far the longest runtime partly because of the wordnet requirements.
+
+Classifier ~
+
+linearSVM with default setting
+
+Evaluation ~
+
+The best features thus far is to remove 'U' from the training data. It boosted the score from the baseline score of .530 to .601. for the english language.
+This might be because by removing any ambigous instance from the data improve the accuracy and quality of the training data.
+
+Another feature/changes that led to drastically improves in accuracy is to use the select linearSVM classifier over knn.
+
+The combination of stemming, removing punctuation, and adding highest score sense words provide a markly improve accuracy also. This might because the quality of feature is improved dramatically when we remove all the useless punctuation characters, and better semantical meaning capturing through word stemming.
